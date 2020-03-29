@@ -18,6 +18,36 @@ void magic_square(int A[4][4])
     a=A[0][3]; A[0][3]=A[3-0][3-3]; A[3-0][3-3]=a;
     a=A[1][2]; A[1][2]=A[3-1][3-2]; A[3-1][3-2]=a;
 }
+
+int saddle_point(int m,int n,int A[m][n])
+{
+    int sum=0;
+    for (int i=0; i<m; i++)
+    {
+        int a=A[i][0];
+        for (int j=1; j<n; j++)
+            if (A[i][j]<=a)
+                a = A[i][j];//先找每行最小值
+        for (int j=0; j<n; j++)
+        {
+            if (A[i][j]==a)
+            {//当找到一个最小值时
+                int count=0;
+                for (int k=0; k<m; k++)
+                {//判断是否为鞍点
+                    if (A[k][j]<=A[i][j])
+                        count++;
+                    if (count==m)
+                    {//列元素最大值
+                        printf("鞍点有(%d,%d)的%d\n",i+1,j+1,a);
+                        sum++;//总鞍点数+1
+                    }
+                }
+            }
+        }
+    }
+    return sum;
+}
 int main(int argc, const char * argv[]) {
     // insert code here...
     printf("Hello, World!\n");
