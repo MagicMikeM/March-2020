@@ -7,17 +7,15 @@
 //
 
 #include <stdio.h>
-void magic_square(int A[4][4])
-{
-    for (int i=0; i<4; i++)
-        for (int j=1; j<=4; j++)
-            A[i][j-1]=i*4+j;
-    int a;
-    a=A[0][0]; A[0][0]=A[3-0][3-0]; A[3-0][3-0]=a;
-    a=A[1][1]; A[1][1]=A[3-1][3-1]; A[3-1][3-1]=a;
-    a=A[0][3]; A[0][3]=A[3-0][3-3]; A[3-0][3-3]=a;
-    a=A[1][2]; A[1][2]=A[3-1][3-2]; A[3-1][3-2]=a;
+int sum(int n,int (*A)[n])
+{//参数中先声明n,后声明数组
+    int sum=0;
+    for (int i=0; i<n; i++)
+        sum += (A[i][i]+A[i][n-i-1]);
+    return sum;
 }
+
+
 
 int saddle_point(int m,int n,int A[m][n])
 {
